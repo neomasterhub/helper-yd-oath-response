@@ -1,16 +1,81 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Helper YD token</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helper Yandex OAuth Token</title>
 </head>
 <body>
-    <code id="response"></code>
+    <div id="container">
+        <img src="logo64.png" alt="logo" width="64">
+        <div id="header">My Helper</div>
+        <div id="code">Authorization Code</div>
+        <div id="response"></div>
+        <div id="timer">2 : 00</div>
+    </div>
     <script>
-        let idx = location.href.indexOf("#");
+        // Code
+        let idx = location.href.indexOf("?code=") + 5;
         if (idx > -1) {
-            document.getElementById("response").innerText += location.href.substring(idx + 1);
+            document.getElementById("response").innerText = location.href.substring(idx + 1);
         }
+        // Timer
+        let minutes = 1;
+        let seconds = 60;
+        var timerInterval = setInterval(function() {
+            seconds--;
+            if(seconds < 0) {
+                minutes--;
+                seconds = 59;
+            }
+            if (minutes < 0) {
+                document.getElementById("timer").innerText = "expired!";
+                clearInterval(timerInterval);
+            } else {
+                document.getElementById("timer").innerText = minutes + " : " + (seconds < 10 ? "0" + seconds : seconds);
+            }
+        }, 1000);
     </script>
+    <style>
+        body {
+            background-color: #fc0;
+        }
+        #container {
+            margin: 50px auto 0;
+            padding: 50px 30px;
+            border-radius: 10px;
+            max-width: 200px;
+            background-color: white;
+            -webkit-box-shadow: 2px 3px 7px 1px #ffc300;
+                    box-shadow: 2px 3px 7px 1px #ffc300;
+            text-align: center;
+        }
+        #header,
+        #code,
+        #response,
+        #timer {
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        #header {
+            margin-bottom: 30px;
+            font-size: 18pt;
+            color: #333;
+        }
+        #code {
+            font-size: 12pt;
+            color: red;
+        }
+        #response {
+            margin-bottom: 30px;
+            font-size: 22pt;
+            color: red;
+        }
+        #timer {
+            font-size: 12pt;
+            color: gray;
+        }
+    </style>
 </body>
 </html>

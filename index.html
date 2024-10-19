@@ -18,7 +18,7 @@
         // Code
         let idx = location.href.indexOf("?code=") + 5;
         if (idx > -1) {
-            document.getElementById("response").innerText = location.href.substring(idx + 1);
+            document.getElementById("response").innerText = location.href.substr(idx + 1, 7);
         }
         // Timer
         let minutes = 1;

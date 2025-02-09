@@ -16,9 +16,10 @@
     </div>
     <script>
         // Code
-        let idx = location.href.indexOf("?code=") + 5;
-        if (idx > -1) {
-            document.getElementById("response").innerText = location.href.substr(idx + 1, 7);
+        const idx1 = location.href.indexOf("?code=") + 6;
+        if (idx1 > -1) {
+            const idx2 = location.href.indexOf("&cid=");
+            document.getElementById("response").innerText = location.href.substring(idx1, idx2);
         }
         // Timer
         let minutes = 1;
